@@ -1,0 +1,924 @@
+fileFormatVersion: 2
+guid: 497d748bcd898f0448feb11920cbc5f7
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ant_blk
+    100004: Armature
+    100006: Ass
+    100008: Back Leg.L
+    100010: Back Leg.R
+    100012: Back Upper Leg.L
+    100014: Back Upper Leg.L.001
+    100016: Back Upper Leg.L.001_end
+    100018: Back Upper Leg.R
+    100020: Back Upper Leg.R.001
+    100022: Back Upper Leg.R.001_end
+    100024: BackKnee.L
+    100026: BackKnee.L_end
+    100028: BackKnee.R
+    100030: BackKnee.R_end
+    100032: BackLegLK.L
+    100034: BackLegLK.L_end
+    100036: BackLegLK.R
+    100038: BackLegLK.R_end
+    100040: Front Leg.L
+    100042: Front Leg.R
+    100044: Front Lower Leg.L
+    100046: Front Lower Leg.L_end
+    100048: Front Lower Leg.R
+    100050: Front Lower Leg.R_end
+    100052: Front Upper Leg.L
+    100054: Front Upper Leg.R
+    100056: FrontKnee.L
+    100058: FrontKnee.L_end
+    100060: FrontKnee.R
+    100062: FrontKnee.R_end
+    100064: FrontLegLK.L
+    100066: FrontLegLK.L_end
+    100068: FrontLegLK.R
+    100070: FrontLegLK.R_end
+    100072: Head
+    100074: Head_end
+    100076: LK Horn.L
+    100078: LK Horn.L_end
+    100080: LK Horn.R
+    100082: LK Horn.R_end
+    100084: Lower Horn.L
+    100086: Lower Horn.R
+    100088: Middle Leg.L
+    100090: Middle Leg.R
+    100092: Middle Upper Leg.L
+    100094: Middle Upper Leg.L.001
+    100096: Middle Upper Leg.L.001_end
+    100098: Middle Upper Leg.R
+    100100: Middle Upper Leg.R.001
+    100102: Middle Upper Leg.R.001_end
+    100104: MiddleKnee.L
+    100106: MiddleKnee.L_end
+    100108: MiddleKnee.R
+    100110: MiddleKnee.R_end
+    100112: MiddleLegLK.L
+    100114: MiddleLegLK.L_end
+    100116: MiddleLegLK.R
+    100118: MiddleLegLK.R_end
+    100120: Month.L
+    100122: Month.L_end
+    100124: Month.R
+    100126: Month.R_end
+    100128: MonthFront.L
+    100130: MonthFront.L_end
+    100132: MonthFront.R
+    100134: MonthFront.R_end
+    100136: Stomach
+    100138: Upper Horn.L
+    100140: Upper Horn.L_end
+    100142: Upper Horn.R
+    100144: Upper Horn.R_end
+    400000: //RootNode
+    400002: ant_blk
+    400004: Armature
+    400006: Ass
+    400008: Back Leg.L
+    400010: Back Leg.R
+    400012: Back Upper Leg.L
+    400014: Back Upper Leg.L.001
+    400016: Back Upper Leg.L.001_end
+    400018: Back Upper Leg.R
+    400020: Back Upper Leg.R.001
+    400022: Back Upper Leg.R.001_end
+    400024: BackKnee.L
+    400026: BackKnee.L_end
+    400028: BackKnee.R
+    400030: BackKnee.R_end
+    400032: BackLegLK.L
+    400034: BackLegLK.L_end
+    400036: BackLegLK.R
+    400038: BackLegLK.R_end
+    400040: Front Leg.L
+    400042: Front Leg.R
+    400044: Front Lower Leg.L
+    400046: Front Lower Leg.L_end
+    400048: Front Lower Leg.R
+    400050: Front Lower Leg.R_end
+    400052: Front Upper Leg.L
+    400054: Front Upper Leg.R
+    400056: FrontKnee.L
+    400058: FrontKnee.L_end
+    400060: FrontKnee.R
+    400062: FrontKnee.R_end
+    400064: FrontLegLK.L
+    400066: FrontLegLK.L_end
+    400068: FrontLegLK.R
+    400070: FrontLegLK.R_end
+    400072: Head
+    400074: Head_end
+    400076: LK Horn.L
+    400078: LK Horn.L_end
+    400080: LK Horn.R
+    400082: LK Horn.R_end
+    400084: Lower Horn.L
+    400086: Lower Horn.R
+    400088: Middle Leg.L
+    400090: Middle Leg.R
+    400092: Middle Upper Leg.L
+    400094: Middle Upper Leg.L.001
+    400096: Middle Upper Leg.L.001_end
+    400098: Middle Upper Leg.R
+    400100: Middle Upper Leg.R.001
+    400102: Middle Upper Leg.R.001_end
+    400104: MiddleKnee.L
+    400106: MiddleKnee.L_end
+    400108: MiddleKnee.R
+    400110: MiddleKnee.R_end
+    400112: MiddleLegLK.L
+    400114: MiddleLegLK.L_end
+    400116: MiddleLegLK.R
+    400118: MiddleLegLK.R_end
+    400120: Month.L
+    400122: Month.L_end
+    400124: Month.R
+    400126: Month.R_end
+    400128: MonthFront.L
+    400130: MonthFront.L_end
+    400132: MonthFront.R
+    400134: MonthFront.R_end
+    400136: Stomach
+    400138: Upper Horn.L
+    400140: Upper Horn.L_end
+    400142: Upper Horn.R
+    400144: Upper Horn.R_end
+    4300000: ant_blk
+    7400000: Armature|Idle
+    7400002: Armature|left
+    7400004: Armature|right
+    7400006: Armature|walking
+    9500000: //RootNode
+    13700000: ant_blk
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Idle
+      takeName: Armature|Idle
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ant_blk
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Ass
+        weight: 1
+      - path: Armature/Ass/Stomach
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001/Back
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001/Back
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L/Front
+          Lower Leg.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R/Front
+          Lower Leg.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Head
+        weight: 1
+      - path: Armature/Ass/Stomach/Head/Head_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L/Upper Horn.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R/Upper Horn.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001/Middle
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001/Middle
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L/Month.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R/Month.R_end
+        weight: 1
+      - path: Armature/BackKnee.L
+        weight: 1
+      - path: Armature/BackKnee.L/BackKnee.L_end
+        weight: 1
+      - path: Armature/BackKnee.R
+        weight: 1
+      - path: Armature/BackKnee.R/BackKnee.R_end
+        weight: 1
+      - path: Armature/BackLegLK.L
+        weight: 1
+      - path: Armature/BackLegLK.L/BackLegLK.L_end
+        weight: 1
+      - path: Armature/BackLegLK.R
+        weight: 1
+      - path: Armature/BackLegLK.R/BackLegLK.R_end
+        weight: 1
+      - path: Armature/FrontKnee.L
+        weight: 1
+      - path: Armature/FrontKnee.L/FrontKnee.L_end
+        weight: 1
+      - path: Armature/FrontKnee.R
+        weight: 1
+      - path: Armature/FrontKnee.R/FrontKnee.R_end
+        weight: 1
+      - path: Armature/FrontLegLK.L
+        weight: 1
+      - path: Armature/FrontLegLK.L/FrontLegLK.L_end
+        weight: 1
+      - path: Armature/FrontLegLK.R
+        weight: 1
+      - path: Armature/FrontLegLK.R/FrontLegLK.R_end
+        weight: 1
+      - path: Armature/LK Horn.L
+        weight: 1
+      - path: Armature/LK Horn.L/LK Horn.L_end
+        weight: 1
+      - path: Armature/LK Horn.R
+        weight: 1
+      - path: Armature/LK Horn.R/LK Horn.R_end
+        weight: 1
+      - path: Armature/MiddleKnee.L
+        weight: 1
+      - path: Armature/MiddleKnee.L/MiddleKnee.L_end
+        weight: 1
+      - path: Armature/MiddleKnee.R
+        weight: 1
+      - path: Armature/MiddleKnee.R/MiddleKnee.R_end
+        weight: 1
+      - path: Armature/MiddleLegLK.L
+        weight: 1
+      - path: Armature/MiddleLegLK.L/MiddleLegLK.L_end
+        weight: 1
+      - path: Armature/MiddleLegLK.R
+        weight: 1
+      - path: Armature/MiddleLegLK.R/MiddleLegLK.R_end
+        weight: 1
+      - path: Armature/MonthFront.L
+        weight: 1
+      - path: Armature/MonthFront.L/MonthFront.L_end
+        weight: 1
+      - path: Armature/MonthFront.R
+        weight: 1
+      - path: Armature/MonthFront.R/MonthFront.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|left
+      takeName: Armature|left
+      firstFrame: 0
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ant_blk
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Ass
+        weight: 1
+      - path: Armature/Ass/Stomach
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001/Back
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001/Back
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L/Front
+          Lower Leg.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R/Front
+          Lower Leg.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Head
+        weight: 1
+      - path: Armature/Ass/Stomach/Head/Head_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L/Upper Horn.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R/Upper Horn.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001/Middle
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001/Middle
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L/Month.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R/Month.R_end
+        weight: 1
+      - path: Armature/BackKnee.L
+        weight: 1
+      - path: Armature/BackKnee.L/BackKnee.L_end
+        weight: 1
+      - path: Armature/BackKnee.R
+        weight: 1
+      - path: Armature/BackKnee.R/BackKnee.R_end
+        weight: 1
+      - path: Armature/BackLegLK.L
+        weight: 1
+      - path: Armature/BackLegLK.L/BackLegLK.L_end
+        weight: 1
+      - path: Armature/BackLegLK.R
+        weight: 1
+      - path: Armature/BackLegLK.R/BackLegLK.R_end
+        weight: 1
+      - path: Armature/FrontKnee.L
+        weight: 1
+      - path: Armature/FrontKnee.L/FrontKnee.L_end
+        weight: 1
+      - path: Armature/FrontKnee.R
+        weight: 1
+      - path: Armature/FrontKnee.R/FrontKnee.R_end
+        weight: 1
+      - path: Armature/FrontLegLK.L
+        weight: 1
+      - path: Armature/FrontLegLK.L/FrontLegLK.L_end
+        weight: 1
+      - path: Armature/FrontLegLK.R
+        weight: 1
+      - path: Armature/FrontLegLK.R/FrontLegLK.R_end
+        weight: 1
+      - path: Armature/LK Horn.L
+        weight: 1
+      - path: Armature/LK Horn.L/LK Horn.L_end
+        weight: 1
+      - path: Armature/LK Horn.R
+        weight: 1
+      - path: Armature/LK Horn.R/LK Horn.R_end
+        weight: 1
+      - path: Armature/MiddleKnee.L
+        weight: 1
+      - path: Armature/MiddleKnee.L/MiddleKnee.L_end
+        weight: 1
+      - path: Armature/MiddleKnee.R
+        weight: 1
+      - path: Armature/MiddleKnee.R/MiddleKnee.R_end
+        weight: 1
+      - path: Armature/MiddleLegLK.L
+        weight: 1
+      - path: Armature/MiddleLegLK.L/MiddleLegLK.L_end
+        weight: 1
+      - path: Armature/MiddleLegLK.R
+        weight: 1
+      - path: Armature/MiddleLegLK.R/MiddleLegLK.R_end
+        weight: 1
+      - path: Armature/MonthFront.L
+        weight: 1
+      - path: Armature/MonthFront.L/MonthFront.L_end
+        weight: 1
+      - path: Armature/MonthFront.R
+        weight: 1
+      - path: Armature/MonthFront.R/MonthFront.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|right
+      takeName: Armature|right
+      firstFrame: 0
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ant_blk
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Ass
+        weight: 1
+      - path: Armature/Ass/Stomach
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001/Back
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001/Back
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L/Front
+          Lower Leg.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R/Front
+          Lower Leg.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Head
+        weight: 1
+      - path: Armature/Ass/Stomach/Head/Head_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L/Upper Horn.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R/Upper Horn.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001/Middle
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001/Middle
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L/Month.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R/Month.R_end
+        weight: 1
+      - path: Armature/BackKnee.L
+        weight: 1
+      - path: Armature/BackKnee.L/BackKnee.L_end
+        weight: 1
+      - path: Armature/BackKnee.R
+        weight: 1
+      - path: Armature/BackKnee.R/BackKnee.R_end
+        weight: 1
+      - path: Armature/BackLegLK.L
+        weight: 1
+      - path: Armature/BackLegLK.L/BackLegLK.L_end
+        weight: 1
+      - path: Armature/BackLegLK.R
+        weight: 1
+      - path: Armature/BackLegLK.R/BackLegLK.R_end
+        weight: 1
+      - path: Armature/FrontKnee.L
+        weight: 1
+      - path: Armature/FrontKnee.L/FrontKnee.L_end
+        weight: 1
+      - path: Armature/FrontKnee.R
+        weight: 1
+      - path: Armature/FrontKnee.R/FrontKnee.R_end
+        weight: 1
+      - path: Armature/FrontLegLK.L
+        weight: 1
+      - path: Armature/FrontLegLK.L/FrontLegLK.L_end
+        weight: 1
+      - path: Armature/FrontLegLK.R
+        weight: 1
+      - path: Armature/FrontLegLK.R/FrontLegLK.R_end
+        weight: 1
+      - path: Armature/LK Horn.L
+        weight: 1
+      - path: Armature/LK Horn.L/LK Horn.L_end
+        weight: 1
+      - path: Armature/LK Horn.R
+        weight: 1
+      - path: Armature/LK Horn.R/LK Horn.R_end
+        weight: 1
+      - path: Armature/MiddleKnee.L
+        weight: 1
+      - path: Armature/MiddleKnee.L/MiddleKnee.L_end
+        weight: 1
+      - path: Armature/MiddleKnee.R
+        weight: 1
+      - path: Armature/MiddleKnee.R/MiddleKnee.R_end
+        weight: 1
+      - path: Armature/MiddleLegLK.L
+        weight: 1
+      - path: Armature/MiddleLegLK.L/MiddleLegLK.L_end
+        weight: 1
+      - path: Armature/MiddleLegLK.R
+        weight: 1
+      - path: Armature/MiddleLegLK.R/MiddleLegLK.R_end
+        weight: 1
+      - path: Armature/MonthFront.L
+        weight: 1
+      - path: Armature/MonthFront.L/MonthFront.L_end
+        weight: 1
+      - path: Armature/MonthFront.R
+        weight: 1
+      - path: Armature/MonthFront.R/MonthFront.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|walking
+      takeName: Armature|walking
+      firstFrame: 0
+      lastFrame: 166
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ant_blk
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Ass
+        weight: 1
+      - path: Armature/Ass/Stomach
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.L/Back Upper Leg.L/Back Upper Leg.L.001/Back
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Back Leg.R/Back Upper Leg.R/Back Upper Leg.R.001/Back
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.L/Front Upper Leg.L/Front Lower Leg.L/Front
+          Lower Leg.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Front Leg.R/Front Upper Leg.R/Front Lower Leg.R/Front
+          Lower Leg.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Head
+        weight: 1
+      - path: Armature/Ass/Stomach/Head/Head_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.L/Upper Horn.L/Upper Horn.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Lower Horn.R/Upper Horn.R/Upper Horn.R_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.L/Middle Upper Leg.L/Middle Upper Leg.L.001/Middle
+          Upper Leg.L.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001
+        weight: 1
+      - path: Armature/Ass/Stomach/Middle Leg.R/Middle Upper Leg.R/Middle Upper Leg.R.001/Middle
+          Upper Leg.R.001_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.L/Month.L_end
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R
+        weight: 1
+      - path: Armature/Ass/Stomach/Month.R/Month.R_end
+        weight: 1
+      - path: Armature/BackKnee.L
+        weight: 1
+      - path: Armature/BackKnee.L/BackKnee.L_end
+        weight: 1
+      - path: Armature/BackKnee.R
+        weight: 1
+      - path: Armature/BackKnee.R/BackKnee.R_end
+        weight: 1
+      - path: Armature/BackLegLK.L
+        weight: 1
+      - path: Armature/BackLegLK.L/BackLegLK.L_end
+        weight: 1
+      - path: Armature/BackLegLK.R
+        weight: 1
+      - path: Armature/BackLegLK.R/BackLegLK.R_end
+        weight: 1
+      - path: Armature/FrontKnee.L
+        weight: 1
+      - path: Armature/FrontKnee.L/FrontKnee.L_end
+        weight: 1
+      - path: Armature/FrontKnee.R
+        weight: 1
+      - path: Armature/FrontKnee.R/FrontKnee.R_end
+        weight: 1
+      - path: Armature/FrontLegLK.L
+        weight: 1
+      - path: Armature/FrontLegLK.L/FrontLegLK.L_end
+        weight: 1
+      - path: Armature/FrontLegLK.R
+        weight: 1
+      - path: Armature/FrontLegLK.R/FrontLegLK.R_end
+        weight: 1
+      - path: Armature/LK Horn.L
+        weight: 1
+      - path: Armature/LK Horn.L/LK Horn.L_end
+        weight: 1
+      - path: Armature/LK Horn.R
+        weight: 1
+      - path: Armature/LK Horn.R/LK Horn.R_end
+        weight: 1
+      - path: Armature/MiddleKnee.L
+        weight: 1
+      - path: Armature/MiddleKnee.L/MiddleKnee.L_end
+        weight: 1
+      - path: Armature/MiddleKnee.R
+        weight: 1
+      - path: Armature/MiddleKnee.R/MiddleKnee.R_end
+        weight: 1
+      - path: Armature/MiddleLegLK.L
+        weight: 1
+      - path: Armature/MiddleLegLK.L/MiddleLegLK.L_end
+        weight: 1
+      - path: Armature/MiddleLegLK.R
+        weight: 1
+      - path: Armature/MiddleLegLK.R/MiddleLegLK.R_end
+        weight: 1
+      - path: Armature/MonthFront.L
+        weight: 1
+      - path: Armature/MonthFront.L/MonthFront.L_end
+        weight: 1
+      - path: Armature/MonthFront.R
+        weight: 1
+      - path: Armature/MonthFront.R/MonthFront.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .5
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
