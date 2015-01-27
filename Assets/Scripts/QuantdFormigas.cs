@@ -21,9 +21,6 @@ public class QuantdFormigas : MonoBehaviour
 	void Update ()
 	{
 		text.text = foundAnts.Count + "             " + lostAnts.Count;
-
-		if (lostAnts.Count + foundAnts.Count == 0)
-						Application.LoadLevel ("GameOver");
 	}
 
 	public static void AddFoundAnt (GameObject ant) {
