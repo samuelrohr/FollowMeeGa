@@ -43,7 +43,7 @@ public class PlayerAntMovement : MonoBehaviour {
 
             if(i < (rayHit.Length/2 - 10) && i > (rayHit.Length/2 + 10))
             {
-                collisionZone = 1;
+                collisionZone = 0.5f;
             }
             if (rayHit [i].transform != null)
             {

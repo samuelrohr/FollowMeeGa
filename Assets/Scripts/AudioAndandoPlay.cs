@@ -5,24 +5,23 @@ public class AudioAndandoPlay : MonoBehaviour {
 
 	public AudioClip andando;
 	private AudioSource source;
+    private PlayerAntMovement antMoveScript;
 
 	void Start () {
 	
 		source = GetComponent<AudioSource>();
+        antMoveScript = GetComponent<PlayerAntMovement>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.W))
+		if((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && antMoveScript.canMove)
 		{
 			source.Play (0);
 
 		}
-	
-		if(Input.GetKeyUp(KeyCode.W))
-		{
+        else{
 			source.Stop ();
-
-	}
-}
+        }
+    }
 }
