@@ -12,9 +12,7 @@ public class MapScript : MonoBehaviour
     //TODO
     public static AStarScript.TilePosition anthillTile;
 
-    public Transform antPrefab;
-
-    void Awake()
+    public void initMapScript()
     {
         //Pegamos os limites do terreno
         Transform mapSize = transform.FindChild("MapSize").FindChild("Quad");
@@ -74,10 +72,5 @@ public class MapScript : MonoBehaviour
 
         return new AStarScript.TilePosition(indexX, indexY);
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-    
-    }
+
 }

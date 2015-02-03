@@ -8,8 +8,6 @@ public class NPCAntJobScript : MonoBehaviour {
     private static AStarScript.TilePosition anthillTile;
     private AStarScript.TilePosition jobTile;
 
-    private static string anthillColliderTag = ColliderTags.anthillColliderTag;
-
     public bool isWorking;
     private bool isCarringSugar;
 

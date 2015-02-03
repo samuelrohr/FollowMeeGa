@@ -21,13 +21,16 @@ public class QuantdFormigas : MonoBehaviour
 	void Update ()
 	{
 		text.text = foundAnts.Count + "             " + lostAnts.Count;
+        if(lostAnts.Count + foundAnts.Count == 1)
+        {
+            Application.LoadLevel("GameOver");
+        }
 	}
 
 	public static void AddFoundAnt (GameObject ant) {
 		if (!foundAnts.Contains(ant)) {
 			RemoveLostAnt(ant);
 			foundAnts.Add(ant);
-            print("chamou");
 		}
 	}
 

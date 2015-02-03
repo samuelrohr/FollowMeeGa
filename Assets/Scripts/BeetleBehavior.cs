@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class BeetleBehavior : MonoBehaviour {
+    //TODO ver como passar esses valores de min e max!!!
 	public float minZ, maxZ;
 	public float minX, maxX;
 	public float moveSpeed;

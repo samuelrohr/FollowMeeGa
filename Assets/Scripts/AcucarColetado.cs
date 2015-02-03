@@ -5,7 +5,7 @@ using System.Collections;
 public class AcucarColetado : MonoBehaviour
 {
        
-    public static float metaAcucarfase = 40;
+    public static float metaAcucarfase = 20;
     public Scrollbar nivelAcucar1;
 
     Text text;
@@ -18,12 +18,12 @@ public class AcucarColetado : MonoBehaviour
     void Update()
     {
         nivelAcucar1.size = NivelAcucar.Acucar / AcucarColetado.metaAcucarfase;
-        if (NivelAcucar.Acucar <= metaAcucarfase)
+        if (NivelAcucar.Acucar < metaAcucarfase)
         {
             text.text = NivelAcucar.Acucar + "/" + metaAcucarfase;
         } else
-            return;
-
-
+        {
+            Application.LoadLevel("Win");
+        }              
     }
 }

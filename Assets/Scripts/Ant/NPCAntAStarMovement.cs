@@ -48,7 +48,6 @@ public class NPCAntAStarMovement : MonoBehaviour
         {
             AStarScript.TilePosition nextTile = pathStack.Pop();
             Vector3 nextPosition = MapScript.GetTileCenterGlobalPosition(nextTile);
-            AStarScript.TilePosition t = MapScript.GetTileFromPosition(nextPosition);
             Vector3 distance = nextPosition - transform.position;
             float angle = Vector3.Angle(Vector3.forward, distance);
             if(distance.x < 0.0f)

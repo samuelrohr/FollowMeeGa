@@ -4,7 +4,6 @@ using System.Collections;
 public class SugarScript : MonoBehaviour {
 
     public float totalOfSugar;
-    private bool finished = false;
 
     public void Eat()
     {

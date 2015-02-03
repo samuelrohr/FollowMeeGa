@@ -16,4 +16,8 @@ public class NivelAcucar : MonoBehaviour {
 	{
 		Acucar += value;
 	}	
+
+    void OnLevelWasLoaded(int level) {
+        Acucar = 0;        
+    }
 }
