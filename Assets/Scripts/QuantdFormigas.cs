@@ -27,6 +27,12 @@ public class QuantdFormigas : MonoBehaviour
         }
 	}
 
+    public static void clearLists()
+    {
+        lostAnts = new List<GameObject> ();
+        foundAnts = new List<GameObject> ();
+    }
+
 	public static void AddFoundAnt (GameObject ant) {
 		if (!foundAnts.Contains(ant)) {
 			RemoveLostAnt(ant);

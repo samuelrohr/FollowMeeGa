@@ -10,15 +10,12 @@ public class SpawnNPC : MonoBehaviour {
     public static bool[,] freeTiles;
     private int maxTilesX;
     private int maxTilesY;
-    
+    private NPCAntJobScript [] antStatus;
+
     // Use this for initialization
-    public void SpawnAnts() {
-        freeTiles = new bool[maxTilesX,maxTilesY];
-        for (int i = 0; i < maxTilesX; i++) {
-            for (int j = 0; j < maxTilesY; j++) {
-                freeTiles[i,j] = i < j ;
-            }
-        }
+    public void SpawnAnts() {  
+        antStatus = new NPCAntJobScript[numberAnts];
+
         Quaternion spawnRotation = Quaternion.identity;
         for (int i = 0; i < numberAnts; i++) {
             int x = (int) Random.Range (0, maxTilesX);
@@ -32,17 +29,12 @@ public class SpawnNPC : MonoBehaviour {
             GameObject newAnt = (GameObject) Instantiate (antNPC, MapScript.GetTileCenterGlobalPosition(tile), spawnRotation);
             QuantdFormigas.AddLostAnt(newAnt);
             newAnt.transform.parent = transform.parent;
+            antStatus[i] = newAnt.transform.GetComponent<NPCAntJobScript>();
         }
 
     }
 
     public void SpawnHopper() {
-        freeTiles = new bool[maxTilesX,maxTilesY];
-        for (int i = 0; i < maxTilesX; i++) {
-            for (int j = 0; j < maxTilesY; j++) {
-                freeTiles[i,j] = i < j ;
-            }
-        }
         Quaternion spawnRotation = Quaternion.identity;
         for (int i = 0; i < numberHoppers; i++) {
             int x = (int) Random.Range (0, maxTilesX);
@@ -63,9 +55,15 @@ public class SpawnNPC : MonoBehaviour {
         
     }
     
-    public void setMaxTiles(int x, int y)
+    public void setMaxTilesAndMap(int x, int y, bool[,] freeTilesMap)
     {
         maxTilesX = x;
         maxTilesY = y;
+        freeTiles = freeTilesMap;
+    }
+
+    public NPCAntJobScript[] getAntsSpawnedStatus()
+    {
+        return antStatus;
     }
 }

@@ -46,6 +46,7 @@ public class BeetleBehavior : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag.Equals(ColliderTags.antNPCTag) && walking) {
 			QuantdFormigas.RemoveAnt(other.gameObject);
+            other.transform.GetComponent<NPCAntJobScript>().isWorking = false;
 			Destroy(other.gameObject);
 		}
 	}

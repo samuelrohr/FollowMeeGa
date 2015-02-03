@@ -49,7 +49,7 @@ public class MapScript : MonoBehaviour
                     mapMatrix[tilePosition.X(), tilePosition.Y()] = true;
                     anthillTile = tilePosition;
                 }
-                else if(tile.name.Equals("Anthill"))
+                else if(tile.name.Equals("GroundChocolate"))
                 {
                     mapMatrix[tilePosition.X(), tilePosition.Y()] = true;
                 }
@@ -81,6 +81,11 @@ public class MapScript : MonoBehaviour
     public Vector3 getMapMax()
     {
         return mapMax;
+    }
+
+    public bool[,] getMapMatrix()
+    {
+        return mapMatrix;
     }
 
 }

@@ -24,11 +24,6 @@ public class NPCAntJobScript : MonoBehaviour {
         anthillTile = MapScript.anthillTile;
        
 	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-	}
 
     public void finished()
     {

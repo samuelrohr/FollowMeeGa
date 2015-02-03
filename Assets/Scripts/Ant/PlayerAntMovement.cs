@@ -40,14 +40,13 @@ public class PlayerAntMovement : MonoBehaviour {
 
         for (int i = 0; i < rayHit.Length; i++)
         {
-
             if(i < (rayHit.Length/2 - 10) && i > (rayHit.Length/2 + 10))
             {
                 collisionZone = 0.5f;
             }
             if (rayHit [i].transform != null)
             {
-                if ((rayHit [i].transform.position - transform.position).magnitude < collisionZone)
+                if ((rayHit[i].transform.position - transform.position).magnitude < collisionZone && !rayHit[i].collider.name.Equals("chocolate"))
                 {
                     canMove = false;
                     break;

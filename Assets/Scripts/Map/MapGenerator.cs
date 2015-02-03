@@ -8,8 +8,10 @@ public class MapGenerator : MonoBehaviour {
     public int numberOfBigTilesX;
     public int numberOfBigTilesZ;
     public int totalOfSugar;
+    private int numberOfSugarTiles;
     
-    private int [,,] mapTiles;
+    private int [,,] mapTilesPosition;
+    private GameObject [,] mapTiles;
     private bool done;
 
     private Surroundings surroundings;
@@ -35,12 +37,15 @@ public class MapGenerator : MonoBehaviour {
     private const int UpperLeft = 12;
     private const int UpperRight = 13;
     private const int UpperT = 14;
+    private const int isAPath = 20;
 
     // Use this for initialization
-    void Start () {
-
-        if(totalOfSugar < 1)
+    public void generateLevel () {
+        if(totalOfSugar <= 0)
             totalOfSugar = 1;
+
+        numberOfSugarTiles = totalOfSugar;
+
 
         surroundings = new Surroundings(numberOfBigTilesX, numberOfBigTilesZ);
 
@@ -63,7 +68,8 @@ public class MapGenerator : MonoBehaviour {
         pieces[13] = Resources.Load("Prefabs/Map_pieces/UpperRight", typeof(GameObject));
         pieces[14] = Resources.Load("Prefabs/Map_pieces/UpperT", typeof(GameObject));
         
-        mapTiles = new int[numberOfBigTilesX, numberOfBigTilesZ, 2];
+        mapTilesPosition = new int[numberOfBigTilesX, numberOfBigTilesZ, 2];
+        mapTiles = new GameObject[numberOfBigTilesX,numberOfBigTilesZ];
         
         //Primeiro criamos as bordas
         fillEdges();
@@ -71,14 +77,15 @@ public class MapGenerator : MonoBehaviour {
         //Depois colocamos o Anthill
         GameObject p = (GameObject)Instantiate(pieces[3], new Vector3(6, 0, 6), Quaternion.identity);
         p.transform.SetParent(transform);
+        mapTiles[1,1] = p;
         //Marcamos a posicao q o anthill ocupou como ocupada
-        mapTiles[1, 1, 0] = -1;
+        mapTilesPosition[1, 1, 0] = -1;
         //Marcamos as areas que sao efetadas pela presenca do anthill
-        mapTiles[2, 1, 0] = 3;
-        mapTiles[2, 1, 1] = RIGHT;
+        mapTilesPosition[2, 1, 0] = 3;
+        mapTilesPosition[2, 1, 1] = RIGHT;
 
-        mapTiles[1, 2, 0] = 3;
-        mapTiles[1, 2, 1] = UP;
+        mapTilesPosition[1, 2, 0] = 3;
+        mapTilesPosition[1, 2, 1] = UP;
 
         //Chamamos o loop para colocar as demais pecas
         while(!done)
@@ -89,6 +96,10 @@ public class MapGenerator : MonoBehaviour {
         //preenchemos os demais espacos
         fillEmptyPlaces();
 
+        //Verifica se a quantidade de sugar solicitada foi colocada
+        //Caso contrario subistitui algumas pecas por sugar
+        placeRemainderSugar();
+
         //Movemos o quad para a posicao correta, cobrindo assim o mapa
         Transform quad = transform.parent.FindChild("MapSize").FindChild("Quad");
         //A posicao central do mapa sera em cada eixo igual a numero total de pecas aquele eixo vezes o total de pecas por tile (3)
@@ -96,19 +107,42 @@ public class MapGenerator : MonoBehaviour {
         quad.position = new Vector3((numberOfBigTilesX * 3 * 2)/2 - 1, 0, (numberOfBigTilesZ * 3 * 2)/2 - 5);
         quad.localScale = new Vector3(numberOfBigTilesX * 3 * 2, numberOfBigTilesZ * 3 * 2, 0);
 
-        //Devemos iniciar o MapScript agora
-        transform.parent.GetComponent<MapScript>().initMapScript();
+    }
 
-        //Informamos ao script que gera as formigas o tamanho do mapa
-        //O valor de maxX e maxY 'e dado em quantidade de tile lembrando que cada bigTile tem 3 tiles
-        transform.GetComponent<SpawnNPC>().setMaxTiles(numberOfBigTilesX * 3, numberOfBigTilesZ * 3);
+    private void placeRemainderSugar()
+    {
+        bool flag;
+        while(totalOfSugar > 0)
+        {
+            flag = false;
+            //Procuramos um BigTile no mapa partindo da estremidade final
+            for(int x = numberOfBigTilesX - 1; x > 0; x = x - getRandom(0,4))
+            {
+                for(int z = numberOfBigTilesZ - 1; z > 0; z = z - getRandom(0,4))
+                {
+                    //Verificamos se o bigTiles atual e um caminho (nao 'e sugar, fullgrass e nem fullgrass2)
+                    if(mapTilesPosition[x,z,1] == isAPath)
+                    {       
+                        flag = true;
+                        //Removemos a peca
+                        Destroy(mapTiles[x,z]);
 
-        //Solicitamos o spawn das ants e hopper npc e do player
-        transform.GetComponent<SpawnNPC>().SpawnAnts();
-        transform.GetComponent<SpawnNPC>().SpawnHopper();    
+                        //Criamos a nova peca como um Sugar
+                        GameObject p = (GameObject)Instantiate(pieces[Sugar], new Vector3(x * 6, 0, z *6), Quaternion.identity);
+                        p.transform.SetParent(transform);
+                        mapTiles[x,z] = p;
 
-        //Iniciamos a camera Ortografica
-        transform.parent.parent.FindChild("CameraOrtografica").GetComponent<OrthographicCamera>().initOrthoCamera(numberOfBigTilesX, numberOfBigTilesZ);
+                        mapTilesPosition[x,z,0] = -1;
+                        mapTilesPosition[x,z,1] = 0;
+
+                        totalOfSugar--;
+                        break;
+                    }
+                }
+                if(flag)
+                    break;
+            }
+        }
     }
 
     private void fillEmptyPlaces()
@@ -119,13 +153,14 @@ public class MapGenerator : MonoBehaviour {
             for(int z = 1; z < numberOfBigTilesZ - 1; z++)
             {
                 //Procuramos por locais com 0 e iremos completalos com fullgrass ou fullgrass2
-                if(mapTiles[x,z,0] == 0)
+                if(mapTilesPosition[x,z,0] == 0)
                 {
                     pieceNumber = getRandom(0,2);
                     GameObject p = (GameObject)Instantiate(pieces[pieceNumber], new Vector3(x * 6, 0, z * 6), Quaternion.identity);
                     p.transform.SetParent(transform);
-                    
-                    mapTiles[x, z, 0] = -1;
+                    mapTiles[x,z] = p;
+
+                    mapTilesPosition[x, z, 0] = -1;
                 }
             }
         }
@@ -142,10 +177,10 @@ public class MapGenerator : MonoBehaviour {
                 //Para uma peca anteriormente colocada
                 //-1 locais com pecas ja colocadas, 0 locais sem pecas mas sem indicacao de pecas anteriores
                 //outros locais com indicacao de pecas anteriores para formar caminhos
-                if(mapTiles[x,z,0] != 0 && mapTiles[x,z,0] != -1)
+                if(mapTilesPosition[x,z,0] != 0 && mapTilesPosition[x,z,0] != -1)
                 {
                     done = false;
-                    int []possiblePieces = piecesRules(mapTiles[x,z,0], mapTiles[x,z,1]);
+                    int []possiblePieces = piecesRules(mapTilesPosition[x,z,0], mapTilesPosition[x,z,1]);
                     //Sorteamos uma peca
                     int random = getRandom(0, possiblePieces.Length);
 
@@ -188,17 +223,17 @@ public class MapGenerator : MonoBehaviour {
                         if(x < numberOfBigTilesX - 3 && z < numberOfBigTilesZ - 3)
                         {
                             int controll = 0;
-                            while(!checkPath(possiblePieces[random]) && controll < 10)
+                            while(!checkPath(possiblePieces[random]) && controll < 20)
                             {
                                 //Se caso entrou no while e porque a peca que iria ser colocada nao ira gerar caminhos
                                 //Logo devemos troca-la por outra
                                 //Se entrou aqui e pq nao era um fullGrass logo devemos evitar q uma peca fullgrass seja
                                 //selecionada para isso pegamos um random entre 2 e possiblepieces.length
-                                while(possiblePieces[random] == FullGrass || possiblePieces[random] == FullGrass2)
+                                while(possiblePieces[random] == FullGrass || possiblePieces[random] == FullGrass2 || possiblePieces[random] == Sugar)
                                     random = getRandom(0, possiblePieces.Length);   
                                 controll++;
                             }
-                            if(controll == 10)
+                            if(controll == 20)
                                 random = 0;
                         }
                     }
@@ -206,9 +241,16 @@ public class MapGenerator : MonoBehaviour {
                     //Criamos a peca
                     GameObject p = (GameObject)Instantiate(pieces[possiblePieces[random]], new Vector3(x * 6, 0, z *6), Quaternion.identity);
                     p.transform.SetParent(transform);
+                    mapTiles[x,z] = p;
 
                     //Marcamos essa posicao do mapa como ocupada
-                    mapTiles[x,z,0] = -1;              
+                    mapTilesPosition[x,z,0] = -1; 
+
+                    //Caso a peca colocada seja um Sugar marcamos essa posicao como ocupada (-1) 
+                    //e marcamos o sentido com o valor Sugar para uso futuro
+                    if(possiblePieces[random] != Sugar && possiblePieces[random] != FullGrass && possiblePieces[random] != FullGrass2)
+                        mapTilesPosition[x,z,1] = isAPath;
+
 
                     //Chamamos alguem aqui que ira marcar as posicoes do mapa que podem receber pecas agora que esta peca foi colocada 
                     //Marca os arredores da peca
@@ -241,7 +283,7 @@ public class MapGenerator : MonoBehaviour {
         {
             for(int z = currZ; z < numberOfBigTilesZ - 1; z++)
             {
-                if(mapTiles[x,z,0] != 0 && mapTiles[x,z,0] != -1)
+                if(mapTilesPosition[x,z,0] != 0 && mapTilesPosition[x,z,0] != -1)
                     return true;
             }
         }
@@ -447,7 +489,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -462,7 +504,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -493,7 +535,7 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 return true;
                             }
@@ -511,7 +553,7 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 return true;
                             }
@@ -527,7 +569,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -542,7 +584,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -557,7 +599,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -572,7 +614,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -587,7 +629,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -602,7 +644,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -617,7 +659,7 @@ public class MapGenerator : MonoBehaviour {
                     if(surroundings.surroundingsMap[i,0] != -100)
                     {
                         //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                        if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                        if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                         {
                             return true;
                         }
@@ -634,7 +676,7 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 return true;
                             }
@@ -660,12 +702,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -678,12 +720,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -698,12 +740,12 @@ public class MapGenerator : MonoBehaviour {
                             if(surroundings.surroundingsMap[i,0] != -100)
                             {
                                 //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                                if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                                if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                                 {
                                     //Marcamos no mapa o numero da peca
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                     //E marcamos sua direcao em relacao a anterior
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                                 }
                             }
                         }
@@ -719,12 +761,12 @@ public class MapGenerator : MonoBehaviour {
                             if(surroundings.surroundingsMap[i,0] != -100)
                             {
                                 //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                                if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                                if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                                 {
                                     //Marcamos no mapa o numero da peca
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                     //E marcamos sua direcao em relacao a anterior
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                                 }
                             }
                         }
@@ -740,12 +782,12 @@ public class MapGenerator : MonoBehaviour {
                             if(surroundings.surroundingsMap[i,0] != -100)
                             {
                                 //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                                if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                                if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                                 {
                                     //Marcamos no mapa o numero da peca
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                     //E marcamos sua direcao em relacao a anterior
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                                 }
                             }
                         }
@@ -759,12 +801,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -777,12 +819,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -795,12 +837,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -813,12 +855,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -831,12 +873,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -849,12 +891,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -867,12 +909,12 @@ public class MapGenerator : MonoBehaviour {
                         if(surroundings.surroundingsMap[i,0] != -100)
                         {
                             //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                            if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                            if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                             {
                                 //Marcamos no mapa o numero da peca
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                 //E marcamos sua direcao em relacao a anterior
-                                mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                             }
                         }
                     }
@@ -887,12 +929,12 @@ public class MapGenerator : MonoBehaviour {
                             if(surroundings.surroundingsMap[i,0] != -100)
                             {
                                 //Verificamos se aquela posicao do mapa ja nao esta preenchida
-                                if(mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
+                                if(mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1], 0] != -1)
                                 {
                                     //Marcamos no mapa o numero da peca
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],0] = pieceNumber;
                                     //E marcamos sua direcao em relacao a anterior
-                                    mapTiles[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
+                                    mapTilesPosition[surroundings.surroundingsMap[i, 0], surroundings.surroundingsMap[i, 1],1] = i;
                                 }
                             }
                         }
@@ -924,8 +966,9 @@ public class MapGenerator : MonoBehaviour {
             pieceNumber = getRandom(0,2);
             GameObject p = (GameObject)Instantiate(pieces[pieceNumber], new Vector3(i * 6, 0, 0), Quaternion.identity);
             p.transform.SetParent(transform);
+            mapTiles[i,0] = p;
 
-            mapTiles[i, 0, 0] = -1;
+            mapTilesPosition[i, 0, 0] = -1;
         }
         
         for(int i = 0; i < numberOfBigTilesX; i++)
@@ -933,8 +976,9 @@ public class MapGenerator : MonoBehaviour {
             pieceNumber = getRandom(0,2);
             GameObject p = (GameObject)Instantiate(pieces[pieceNumber], new Vector3(i * 6, 0, (numberOfBigTilesZ - 1) * 6), Quaternion.identity);
             p.transform.SetParent(transform);
+            mapTiles[i,numberOfBigTilesZ - 1] = p;
 
-            mapTiles[i, numberOfBigTilesZ - 1, 0] = -1;
+            mapTilesPosition[i, numberOfBigTilesZ - 1, 0] = -1;
         }
         
         for(int i = 1; i < numberOfBigTilesZ - 1; i++)
@@ -942,8 +986,9 @@ public class MapGenerator : MonoBehaviour {
             pieceNumber = getRandom(0,2);
             GameObject p = (GameObject)Instantiate(pieces[pieceNumber], new Vector3(0, 0, i * 6), Quaternion.identity);
             p.transform.SetParent(transform);
-            
-            mapTiles[0, i, 0] = -1;
+            mapTiles[0,i] = p;
+
+            mapTilesPosition[0, i, 0] = -1;
         }
         
         for(int i = 1; i < numberOfBigTilesZ - 1; i++)
@@ -951,8 +996,9 @@ public class MapGenerator : MonoBehaviour {
             pieceNumber = getRandom(0,2);
             GameObject p = (GameObject)Instantiate(pieces[pieceNumber], new Vector3((numberOfBigTilesX - 1) * 6, 0, i * 6), Quaternion.identity);
             p.transform.SetParent(transform);
-            
-            mapTiles[numberOfBigTilesX - 1, i, 0] = -1;
+            mapTiles[numberOfBigTilesX - 1,i] = p;
+
+            mapTilesPosition[numberOfBigTilesX - 1, i, 0] = -1;
         }
     }
    
@@ -1030,5 +1076,25 @@ public class MapGenerator : MonoBehaviour {
                 surroundingsMap[Down,Z] = currZ - 1;
             }
         }
+    }
+
+    //Retorna um vetor que aponta para o tiles de sugar colocados no jogo
+    public GameObject[] getSugarTiles()
+    {
+        GameObject[] sugarTiles = new GameObject[numberOfSugarTiles];
+        int i = 0;
+
+        for(int x = 1; x < numberOfBigTilesX - 1; x++)
+        {
+            for(int z = 1; z < numberOfBigTilesZ - 1; z++)
+            {
+                if(mapTiles[x,z].name.Equals("Sugar(Clone)"))
+                {
+                    sugarTiles[i] = mapTiles[x,z];
+                    i++;
+                }
+            }
+        }
+        return sugarTiles;
     }
 }
