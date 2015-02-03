@@ -73,4 +73,14 @@ public class MapScript : MonoBehaviour
         return new AStarScript.TilePosition(indexX, indexY);
     }
 
+    public Vector3 getMapMin()
+    {
+        return mapMin;
+    }
+
+    public Vector3 getMapMax()
+    {
+        return mapMax;
+    }
+
 }

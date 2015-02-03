@@ -4,7 +4,6 @@ using System.Collections;
 public class MapGenerator : MonoBehaviour {
     
     private Object [] pieces;
-    private Object playerAnt;
 
     public int numberOfBigTilesX;
     public int numberOfBigTilesZ;
@@ -63,8 +62,6 @@ public class MapGenerator : MonoBehaviour {
         pieces[12] = Resources.Load("Prefabs/Map_pieces/UpperLeft", typeof(GameObject));
         pieces[13] = Resources.Load("Prefabs/Map_pieces/UpperRight", typeof(GameObject));
         pieces[14] = Resources.Load("Prefabs/Map_pieces/UpperT", typeof(GameObject));
-
-        playerAnt = Resources.Load("Prefabs/Ants/PlayerAnt", typeof(GameObject));
         
         mapTiles = new int[numberOfBigTilesX, numberOfBigTilesZ, 2];
         
@@ -109,6 +106,9 @@ public class MapGenerator : MonoBehaviour {
         //Solicitamos o spawn das ants e hopper npc e do player
         transform.GetComponent<SpawnNPC>().SpawnAnts();
         transform.GetComponent<SpawnNPC>().SpawnHopper();    
+
+        //Iniciamos a camera Ortografica
+        transform.parent.parent.FindChild("CameraOrtografica").GetComponent<OrthographicCamera>().initOrthoCamera(numberOfBigTilesX, numberOfBigTilesZ);
     }
 
     private void fillEmptyPlaces()
