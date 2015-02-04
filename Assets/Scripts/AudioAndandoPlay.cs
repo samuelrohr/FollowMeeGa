@@ -6,6 +6,8 @@ public class AudioAndandoPlay : MonoBehaviour {
 	public AudioClip andando;
 	private AudioSource source;
     private PlayerAntMovement antMoveScript;
+    private bool keyUp = true;
+    private bool playing = false;
 
 	void Start () {
 	
@@ -15,13 +17,25 @@ public class AudioAndandoPlay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && antMoveScript.canMove)
-		{
-			source.Play (0);
+        if(Input.GetKeyDown(KeyCode.W))
+            keyUp = false;
 
-		}
-        else{
-			source.Stop ();
+
+        if(!keyUp && antMoveScript.canMove && !playing)
+        {   
+            playing = true;
+            source.Play (0);           
         }
+        if(!antMoveScript.canMove)
+        {
+            playing = false;
+            source.Stop();
+        }
+        if(Input.GetKeyUp(KeyCode.W)|| Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            keyUp = true;
+            source.Stop();
+        }
+
     }
 }

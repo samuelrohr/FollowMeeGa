@@ -8,7 +8,7 @@ public class MainMenuBehavior : MenuBehaviour {
 		case "start":
 			Application.LoadLevel("Match");
 			break;
-		case "options":
+		case "tutorial":
 			//TODO adicionar cena do menu para trocar comandos
 			break;
 		case "quit":

@@ -49,7 +49,7 @@ public class Follow : MonoBehaviour
             flagUpdate++;
         }
 
-		if (collidingWithSugar && collidingSugar != null && Input.GetKeyDown (KeyCode.J) && follower != null) {
+		if (collidingWithSugar && collidingSugar != null && Input.GetKeyDown (KeyCode.F) && follower != null) {
 			GameObject last = follower.GetComponent<SecondaryFollow> ().UnfollowLast();
 			if (follower.Equals(last))
 			{
@@ -123,7 +123,6 @@ public class Follow : MonoBehaviour
             SecondaryFollow secFollow = follower.GetComponent<SecondaryFollow>();
             if (secFollow != null)
                 secFollow.UpdateFollower();
-            //follower.UpdateFollower();
         }
         
     }
